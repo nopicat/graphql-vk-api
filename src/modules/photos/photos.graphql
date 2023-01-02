@@ -1,0 +1,38 @@
+type Photo {
+    id: Int!
+    albumId: Int
+    ownerId: Int
+    userId: Int
+    text: String
+    date: Int
+    sizes: [PhotoSize]
+    width: Int
+    height: Int
+}
+
+type PhotoSize {
+    type: String
+    url: String
+    width: Int
+    height: Int
+}
+
+type CropPhoto {
+    photo: Photo
+    crop: Crop
+    rect: Rect
+}
+
+type Crop {
+    x: Float
+    y: Float
+    x2: Float
+    y2: Float
+}
+
+type Rect {
+    x: Float
+    y: Float
+    x2: Float
+    y2: Float
+}

@@ -1,0 +1,8 @@
+type Group {
+    id: Int!
+}
+
+type GroupIdsWithCount {
+    count: Int!
+    items: [Int!]!
+}

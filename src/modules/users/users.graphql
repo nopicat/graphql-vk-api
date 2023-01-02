@@ -1,0 +1,258 @@
+type User {
+    id: Int!
+    firstName: String!
+    lastName: String!
+    deactivated: String
+    isClosed: Boolean!
+    canAccessClosed: Boolean!
+    about: String
+    activities: String
+    bdate: String
+    blacklisted: Boolean
+    blacklistedByMe: Boolean
+    books: String
+    canPost: Boolean
+    canSeeAllPosts: Boolean
+    canSeeAudio: Boolean
+    canSendFriendRequest: Boolean
+    canWritePrivateMessage: Boolean
+    career: Career
+    city: City
+    commonCount: Int
+    connections: Connections
+    contacts: Contacts
+    counters: Counters
+    country: Country
+    cropPhoto: CropPhoto
+    domain: String
+    education: Education
+    exports: [String]
+    firstNameNom: String
+    firstNameGen: String
+    firstNameDat: String
+    firstNameAcc: String
+    firstNameIns: String
+    firstNameAbl: String
+    lastNameNom: String
+    lastNameGen: String
+    lastNameDat: String
+    lastNameAcc: String
+    lastNameIns: String
+    lastNameAbl: String
+    followersCount: Int
+    friendStatus: Int
+    games: String
+    hasMobile: Boolean
+    hasPhoto: Boolean
+    homeTown: String
+    interests: String
+    isFavorite: Boolean
+    isFriend: Boolean
+    isHiddenFromFeed: Boolean
+    lastSeen: LastSeen
+    lists: String
+    maidenName: String
+    military: Military
+    movies: String
+    music: String
+    nickname: String
+    occupation: Occupation
+    online: Boolean
+    personal: Personal
+    photo50: String
+    photo100: String
+    photo200Orig: String
+    photo200: String
+    photo400Orig: String
+    photoId: String
+    photoMax: String
+    photoMaxOrig: String
+    quotes: String
+    relation: Int
+    schools: [School]
+    screenName: String
+    sex: Int
+    site: String
+    status: String
+    timezone: Int
+    trending: Int
+    tv: String
+    universities: [University]
+    verified: Boolean
+    wallDefault: String
+}
+
+type Career {
+    groupId: Int
+    company: String
+    countryId: Int
+    cityId: Int
+    city: String
+    from: Int
+    until: Int
+    position: String
+}
+
+type Connections {
+    skype: String
+    livejournal: String
+}
+
+type City {
+    id: Int
+    title: String
+}
+
+type Contacts {
+    mobilePhone: String
+    homePhone: String
+}
+
+type Counters {
+    albums: Int
+    videos: Int
+    audios: Int
+    notes: Int
+    photos: Int
+    friends: Int
+    groups: Int
+    onlineFriends: Int
+    mutualFriends: Int
+    userVideos: Int
+    followers: Int
+    pages: Int
+}
+
+type Country {
+    id: Int
+    title: String
+}
+
+type Education {
+    university: Int
+    universityName: String
+    faculty: Int
+    facultyName: String
+    graduation: Int
+}
+
+type LastSeen {
+    time: Int
+    platform: Int
+}
+
+type Military {
+    unit: String
+    unitId: Int
+    countryId: Int
+    from: Int
+    until: Int
+}
+
+type Occupation {
+    type: String
+    id: Int
+    name: String
+}
+
+type Personal {
+    political: Int
+    langs: String
+    religion: String
+    inspiredBy: String
+    peopleMain: Int
+    lifeMain: Int
+    smoking: Int
+    alcohol: Int
+}
+
+type School {
+    id: Int
+    country: Int
+    city: Int
+    name: String
+    yearFrom: Int
+    yearTo: Int
+    yearGraduated: Int
+    class: String
+    speciality: String
+    type: Int
+    typeStr: String
+}
+
+type University {
+    id: Int
+    country: Int
+    city: Int
+    name: String
+    faculty: Int
+    facultyName: String
+    chair: Int
+    chairName: String
+    graduation: Int
+    educationForm: String
+    educationStatus: String
+}
+
+type Query {
+    usersGet(userIds: [String!]!, nameCase: String): [User!]!
+    usersGetFollowers(userId: Int!, offset: Int, count: Int, nameCase: String): UsersWithCountAndFriendsCount!
+    usersGetSubscriptions(userId: Int!, offset: Int, count: Int, extended: Boolean, nameCase: String): UserIdsAndGroupIdsWithCount!
+    usersReport(userId: Int!, type: String!, comment: String): BasicResponse!
+    usersSearch(
+        q: String!,
+        sort: Int,
+        offset: Int,
+        count: Int,
+        fields: String,
+        city: Int,
+        country: Int,
+        hometown: String,
+        universityCountry: Int,
+        university: Int,
+        universityYear: Int,
+        universityFaculty: Int,
+        universityChair: Int,
+        sex: Int,
+        status: Int,
+        ageFrom: Int,
+        ageTo: Int,
+        birthDay: Int,
+        birthMonth: Int,
+        birthYear: Int,
+        online: Boolean,
+        hasPhoto: Boolean,
+        schoolCountry: Int,
+        schoolCity: Int,
+        schoolClass: Int,
+        school: Int,
+        schoolYear: Int,
+        religion: String,
+        interests: String,
+        company: String,
+        position: String,
+        groupId: Int,
+        fromList: String
+    ): UsersWithCount!
+}
+
+type UsersWithCount {
+    count: Int!
+    items: [User!]!
+}
+
+type UserIdsWithCount {
+    count: Int!
+    items: [Int!]!
+}
+
+type UsersWithCountAndFriendsCount {
+    count: Int!
+    friendsCount: Int!
+    items: [User!]!
+}
+
+type UserIdsAndGroupIdsWithCount {
+    users: UserIdsWithCount!
+    groups: GroupIdsWithCount!
+}

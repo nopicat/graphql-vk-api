@@ -1,4 +1,4 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { VKClient } from '../../common/decorators/vk-client.decorator';
 import { GqlKeys } from '../../common/decorators/gql-keys.decorator';
 import {
@@ -50,7 +50,7 @@ export class UsersResolver {
         });
     }
 
-    @Query(() => [BasicResponse])
+    @Mutation(() => [BasicResponse])
     public usersReport(@VKClient() vk: VK, @Args(GqlArgsToSnakePipe) args) {
         return vk.api.users.report({
             ...args,

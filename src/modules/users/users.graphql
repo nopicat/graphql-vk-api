@@ -194,11 +194,31 @@ type University {
     educationStatus: String
 }
 
+type UsersWithCount {
+    count: Int!
+    items: [User!]!
+}
+
+type UserIdsWithCount {
+    count: Int!
+    items: [Int!]!
+}
+
+type UsersWithCountAndFriendsCount {
+    count: Int!
+    friendsCount: Int!
+    items: [User!]!
+}
+
+type UserIdsAndGroupIdsWithCount {
+    users: UserIdsWithCount!
+    groups: GroupIdsWithCount!
+}
+
 type Query {
     usersGet(userIds: [String!]!, nameCase: String): [User!]!
     usersGetFollowers(userId: Int!, offset: Int, count: Int, nameCase: String): UsersWithCountAndFriendsCount!
     usersGetSubscriptions(userId: Int!, offset: Int, count: Int, extended: Boolean, nameCase: String): UserIdsAndGroupIdsWithCount!
-    usersReport(userId: Int!, type: String!, comment: String): BasicResponse!
     usersSearch(
         q: String!,
         sort: Int,
@@ -236,23 +256,6 @@ type Query {
     ): UsersWithCount!
 }
 
-type UsersWithCount {
-    count: Int!
-    items: [User!]!
-}
-
-type UserIdsWithCount {
-    count: Int!
-    items: [Int!]!
-}
-
-type UsersWithCountAndFriendsCount {
-    count: Int!
-    friendsCount: Int!
-    items: [User!]!
-}
-
-type UserIdsAndGroupIdsWithCount {
-    users: UserIdsWithCount!
-    groups: GroupIdsWithCount!
+type Mutation {
+    usersReport(userId: Int!, type: String!, comment: String): BasicResponse!
 }
